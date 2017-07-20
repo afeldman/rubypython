@@ -63,7 +63,7 @@ class RubyPython::Interpreter
 
       attach_function :PyObject_RichCompareBool, [:pointer, :pointer, :int], :int
 
-      attach_function :PyObject_RichCompare, [:pointer, :pointer, :int], :int
+      attach_function :PyObject_RichCompare, [:pointer, :pointer, :int], :pointer
       
       attach_function :PyObject_Call, [:pointer, :pointer, :pointer], :pointer
       attach_function :PyObject_CallObject, [:pointer, :pointer], :pointer
@@ -71,10 +71,10 @@ class RubyPython::Interpreter
 
       ### Python To Ruby Conversion
       # String Methods
-      attach_function :PyString_AsString, [:pointer], :string
-      attach_function :PyString_FromString, [:string], :pointer
-      attach_function :PyString_AsStringAndSize, [:pointer, :pointer, :pointer], :int
-      attach_function :PyString_FromStringAndSize, [:buffer_in, :ssize_t], :pointer
+      attach_function :PyUnicode_AsUTF8, [:pointer], :string
+      attach_function :PyUnicode_FromString, [:string], :pointer
+      attach_function :PyUnicode_AsUTF8AndSize, [:pointer, :pointer], :pointer
+      attach_function :PyUnicode_FromStringAndSize, [:buffer_in, :ssize_t], :pointer
 
       # List Methods
       attach_function :PyList_GetItem, [:pointer, :int], :pointer
