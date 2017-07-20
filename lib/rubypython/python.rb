@@ -128,7 +128,7 @@ class RubyPython::Interpreter
       attach_variable :PyLong_Type, self::DummyStruct.by_value
       attach_variable :PyList_Type, self::DummyStruct.by_value
       attach_variable :PyMethod_Type, self::DummyStruct.by_value
-      attach_variable :PyString_Type, self::DummyStruct.by_value
+      attach_variable :PyUnicode_Type, self::DummyStruct.by_value
       attach_variable :PyTuple_Type, self::DummyStruct.by_value
       attach_variable :PyType_Type, self::DummyStruct.by_value
       attach_variable :Py_TrueStruct, :_Py_TrueStruct, self::DummyStruct.by_value
