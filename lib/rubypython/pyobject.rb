@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rubypython/python'
 require 'rubypython/macros'
 require 'rubypython/conversion'
@@ -171,10 +172,7 @@ class RubyPython::PyObject # :nodoc: all
   # Tests whether the wrapped object is a RubyPython::Python class (both new
   # and old style).
   def class?
-    check = RubyPython::Macros.PyObject_TypeCheck(@pointer, [
-                                                  RubyPython::Python.PyClass_Type.to_ptr,
-                                                  RubyPython::Python.PyType_Type.to_ptr
-    ])
+    check = RubyPython::Macros.PyObject_TypeCheck(@pointer, [RubyPython::Python.PyType_Type.to_ptr])
     check != 0
   end
 

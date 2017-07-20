@@ -132,7 +132,7 @@ class RubyPython::Interpreter
       attach_variable :PyTuple_Type, self::DummyStruct.by_value
       attach_variable :PyType_Type, self::DummyStruct.by_value
       attach_variable :Py_TrueStruct, :_Py_TrueStruct, self::DummyStruct.by_value
-      attach_variable :Py_ZeroStruct, :_Py_ZeroStruct, self::DummyStruct.by_value
+#      attach_variable :Py_ZeroStruct, :_Py_ZeroStruct, self::DummyStruct.by_value
       attach_variable :Py_NoneStruct, :_Py_NoneStruct, self::DummyStruct.by_value
 
       # This is an implementation of the basic structure of a Python PyObject

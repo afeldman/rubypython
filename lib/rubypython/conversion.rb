@@ -17,7 +17,7 @@ module RubyPython::Conversion
   # a PyStringObject.
   def self.rtopString(rString)
     size = rString.respond_to?(:bytesize) ? rString.bytesize : rString.size
-    ptr = RubyPython::Python.PyString_FromStringAndSize(rString, size)
+    ptr = RubyPython::Python.PyUnicode_FromStringAndSize(rString, size)
     if ptr.null?
       raise ConversionError.new "Python failed to create a string with contents #{rString}"
     else
@@ -208,21 +208,19 @@ module RubyPython::Conversion
     #not be modified
     strPtr  = ::FFI::MemoryPointer.new(:pointer)
     sizePtr = ::FFI::MemoryPointer.new(:ssize_t)
-
-    RubyPython::Python.PyString_AsStringAndSize(pString, strPtr, sizePtr)
+    
+    strPtr = RubyPython::Python.PyUnicode_AsUTF8AndSize(pString, sizePtr)
 
     size = case ::FFI.find_type(:ssize_t)
            when ::FFI.find_type(:long)
              sizePtr.read_long
-           when ::FFI.find_type(:int)
-             sizePtr.read_int
            when ::FFI.find_type(:long_long)
              sizePtr.read_long_long
            else
              nil
            end
 
-    strPtr.read_pointer.read_string(size)
+    strPtr.read_string(size)
   end
 
   # Convert an FFI::Pointer to a \Python List (PyListObject) to a Ruby
@@ -302,14 +300,12 @@ module RubyPython::Conversion
   #
   # [pObj]  An FFI::Pointer to a \Python object.
   def self.ptorObject(pObj)
-    if RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyString_Type.to_ptr) != 0
+    if RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyUnicode_Type.to_ptr) != 0
       ptorString pObj
     elsif RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyList_Type.to_ptr) != 0
       ptorList pObj
-    elsif RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyInt_Type.to_ptr) != 0
-      ptorInt pObj
     elsif RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyLong_Type.to_ptr) != 0
-      ptorLong pObj
+      ptorInt pObj
     elsif RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyFloat_Type.to_ptr) != 0
       ptorFloat pObj
     elsif RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyTuple_Type.to_ptr) != 0

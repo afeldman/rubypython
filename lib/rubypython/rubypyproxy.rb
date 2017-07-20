@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rubypython/pythonerror'
 require 'rubypython/pyobject'
 require 'rubypython/conversion'
