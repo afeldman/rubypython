@@ -119,62 +119,18 @@ class RubyPython::Interpreter
 
       # Type Objects
       # attach_variable :PyBaseObject_Type, self::DummyStruct.by_value # built-in 'object' 
-      # attach_variable :PyBaseString_Type, self::DummyStruct.by_value
-      # attach_variable :PyBool_Type, self::DummyStruct.by_value
-      # attach_variable :PyBuffer_Type, self::DummyStruct.by_value
-      # attach_variable :PyByteArrayIter_Type, self::DummyStruct.by_value
-      # attach_variable :PyByteArray_Type, self::DummyStruct.by_value
+
       attach_variable :PyCFunction_Type, self::DummyStruct.by_value
-      # attach_variable :PyCObject_Type, self::DummyStruct.by_value
-      # attach_variable :PyCallIter_Type, self::DummyStruct.by_value
-      # attach_variable :PyCapsule_Type, self::DummyStruct.by_value
-      # attach_variable :PyCell_Type, self::DummyStruct.by_value
-      # attach_variable :PyClassMethod_Type, self::DummyStruct.by_value
-      attach_variable :PyClass_Type, self::DummyStruct.by_value
-      # attach_variable :PyCode_Type, self::DummyStruct.by_value
-      # attach_variable :PyComplex_Type, self::DummyStruct.by_value
-      # attach_variable :PyDictItems_Type, self::DummyStruct.by_value
-      # attach_variable :PyDictIterItem_Type, self::DummyStruct.by_value
-      # attach_variable :PyDictIterKey_Type, self::DummyStruct.by_value
-      # attach_variable :PyDictIterValue_Type, self::DummyStruct.by_value
-      # attach_variable :PyDictKeys_Type, self::DummyStruct.by_value
-      # attach_variable :PyDictProxy_Type, self::DummyStruct.by_value
-      # attach_variable :PyDictValues_Type, self::DummyStruct.by_value
+      attach_variable :PyType_Type, self::DummyStruct.by_value
       attach_variable :PyDict_Type, self::DummyStruct.by_value
-      # attach_variable :PyEllipsis_Type, self::DummyStruct.by_value
-      # attach_variable :PyEnum_Type, self::DummyStruct.by_value
-      # attach_variable :PyFile_Type, self::DummyStruct.by_value
       attach_variable :PyFloat_Type, self::DummyStruct.by_value
-      # attach_variable :PyFrame_Type, self::DummyStruct.by_value
-      # attach_variable :PyFrozenSet_Type, self::DummyStruct.by_value
       attach_variable :PyFunction_Type, self::DummyStruct.by_value
-      # attach_variable :PyGen_Type, self::DummyStruct.by_value
-      # attach_variable :PyGetSetDescr_Type, self::DummyStruct.by_value
-      # attach_variable :PyInstance_Type, self::DummyStruct.by_value
-      attach_variable :PyInt_Type, self::DummyStruct.by_value
-      attach_variable :PyList_Type, self::DummyStruct.by_value
       attach_variable :PyLong_Type, self::DummyStruct.by_value
-      # attach_variable :PyMemberDescr_Type, self::DummyStruct.by_value
-      # attach_variable :PyMemoryView_Type, self::DummyStruct.by_value
+      attach_variable :PyList_Type, self::DummyStruct.by_value
       attach_variable :PyMethod_Type, self::DummyStruct.by_value
-      # attach_variable :PyModule_Type, self::DummyStruct.by_value
-      # attach_variable :PyNullImporter_Type, self::DummyStruct.by_value
-      # attach_variable :PyProperty_Type, self::DummyStruct.by_value
-      # attach_variable :PyRange_Type, self::DummyStruct.by_value
-      # attach_variable :PyReversed_Type, self::DummyStruct.by_value
-      # attach_variable :PySTEntry_Type, self::DummyStruct.by_value
-      # attach_variable :PySeqIter_Type, self::DummyStruct.by_value
-      # attach_variable :PySet_Type, self::DummyStruct.by_value
-      # attach_variable :PySlice_Type, self::DummyStruct.by_value
-      # attach_variable :PyStaticMethod_Type, self::DummyStruct.by_value
       attach_variable :PyString_Type, self::DummyStruct.by_value
-      # attach_variable :PySuper_Type, self::DummyStruct.by_value # built-in 'super' 
-      # attach_variable :PyTraceBack_Type, self::DummyStruct.by_value
       attach_variable :PyTuple_Type, self::DummyStruct.by_value
       attach_variable :PyType_Type, self::DummyStruct.by_value
-      # attach_variable :PyUnicode_Type, self::DummyStruct.by_value
-      # attach_variable :PyWrapperDescr_Type, self::DummyStruct.by_value
-
       attach_variable :Py_TrueStruct, :_Py_TrueStruct, self::DummyStruct.by_value
       attach_variable :Py_ZeroStruct, :_Py_ZeroStruct, self::DummyStruct.by_value
       attach_variable :Py_NoneStruct, :_Py_NoneStruct, self::DummyStruct.by_value
