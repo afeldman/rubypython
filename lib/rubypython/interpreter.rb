@@ -42,23 +42,23 @@ class RubyPython::Interpreter
     # Mac OS X: '/usr/bin/
 
     # The default interpreter might be python3 on some systems
-    rc, majorversion = runpy "import sys; print(sys.version_info[0])"
-    if majorversion == "3"
-      warn "The python interpreter is python 3, switching to python2"
-      @python_exe = "python2"
-    end
+#    rc, majorversion = runpy "import sys; print(sys.version_info[0])"
+#    if majorversion == "3"
+#      warn "The python interpreter is python 3, switching to python2"
+#      @python_exe = "python2"
+#    end
 
-    rc, @python     = runpy "import sys; print sys.executable"
+    rc, @python     = runpy "import sys; print(sys.executable)"
     if rc.exitstatus.nonzero?
       raise RubyPython::InvalidInterpreter, "An invalid interpreter was specified."
     end
-    rc, @version    = runpy "import sys; print '%d.%d' % sys.version_info[:2]"
-    rc, @sys_prefix = runpy "import sys; print sys.prefix"
-
+    rc, @version    = runpy "import sys; print ('%d.%d' % sys.version_info[:2])"
+    rc, @sys_prefix = runpy "import sys; print (sys.prefix)"
+    
     if ::FFI::Platform.windows?
       flat_version  = @version.tr('.', '')
       basename      = File.basename(@python, '.exe')
-
+      
       if basename =~ /(?:#{@version}|#{flat_version})$/
         @version_name = basename
       else
@@ -70,6 +70,8 @@ class RubyPython::Interpreter
         @version_name = basename
       elsif basename.end_with?("2")
         @version_name = "#{basename[0..-2]}#{@version}"
+      elsif basename.end_with?("3")
+        @version_name = "#{basename[0..-2]}#{@version}"        
       else
         @version_name = "#{basename}#{@version}"
       end
@@ -88,7 +90,7 @@ class RubyPython::Interpreter
     # We may need to look in multiple locations for Python, so let's
     # build this as an array.
     @locations = [ File.join(@sys_prefix, "lib", @libname) ]
-
+    
     if ::FFI::Platform.mac?
       # On the Mac, let's add a special case that has even a different
       # @libname. This may not be fully useful on future versions of OS
@@ -156,7 +158,7 @@ class RubyPython::Interpreter
         break
       end
     end
-
+    
     library
   end
   private :find_python_lib
@@ -205,7 +207,7 @@ class RubyPython::Interpreter
     else
       o = %x(#{i} -c "#{command}" 2> /dev/null)
     end
-
+    
     [ $?, o.chomp ]
   end
   private :runpy
